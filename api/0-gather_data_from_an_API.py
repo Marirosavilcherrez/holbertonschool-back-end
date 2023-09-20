@@ -5,11 +5,6 @@ import sys
 
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com"
-
-    if len(sys.argv) != 2:
-        print("Uso: python script.py <user_id>")
-        sys.exit(1)
-
     user_id = sys.argv[1]
 
     user = requests.get(url + "/users/{}".format(user_id)).json()

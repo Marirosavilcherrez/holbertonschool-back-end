@@ -1,25 +1,20 @@
-#!/usr/bin/python3
-"""Python script that using REST API"""
 import requests
 import sys
 
 if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com"
-
-    if len(sys.argv) != 2:
-        print("Uso: python script.py <user_id>")
-        sys.exit(1)
-
     user_id = sys.argv[1]
+    todo_url = "https://jsonplaceholder.typicode.com/todos?userId={user_id}"
+    user_url = "https://jsonplaceholder.typicode.com/users/{user_id}"
 
-    user = requests.get(url + "/users/{}".format(user_id)).json()
-    todos = requests.get(url + "/todos", params={"userId": user_id}).json()
+    response1 = requests.get(todo_url).json()
+    response2 = requests.get(user_url).json()
 
-    total_tasks = len(todos)
-    completed_tasks = sum(1 for todo in todos if todo["completed"])
+    number_tasks_done = sum(1 for task in response1 if task["completed"])
+    total_tasks = len(response1)
 
-    print("Employee {} is done with tasks ({}/{}):".format(user.get("name"), completed_tasks, total_tasks))
+    employee_name = response2.get("name")
+    task_titles = [task["title"] for task in response1 if task["completed"]]
 
-    for todo in todos:
-        if todo["completed"]:
-            print("\t{}".format(todo["title"]))
+    print("Employee {} is done with tasks({}/{})".format(employee_name, number_tasks_done, total_tasks))
+    for title in task_titles:
+        print(f"\t{title}")

@@ -1,12 +1,9 @@
 #!/usr/bin/python3
 """Python script that using REST API"""
-
 import requests
 import sys
 
 if __name__ == "__main__":
-
-    url = "https://jsonplaceholder.typicode.com"
     user_id = sys.argv[1]
     todo_url = "https://jsonplaceholder.typicode.com/todos?userId={user_id}"
     user_url = "https://jsonplaceholder.typicode.com/users/{user_id}"
@@ -20,9 +17,7 @@ if __name__ == "__main__":
     employee_name = response2.get("name")
     task_titles = [task["title"] for task in response1 if task["completed"]]
 
-    print("Employee {} is done with tasks ({}/{}):".format(
-          user.get("name"), completed_tasks, total_tasks))
-
-    print("Employee {} is done with tasks({}/{})".format(employee_name, number_tasks_done, total_tasks))
+    print("Employee {} is done with tasks({}/{})".format(
+          employee_name, number_tasks_done, total_tasks))
     for title in task_titles:
         print(f"\t{title}")

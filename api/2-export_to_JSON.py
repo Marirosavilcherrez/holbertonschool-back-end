@@ -16,6 +16,10 @@ if __name__ == "__main__":
     total_tasks = len(response1)
 
     employee_name = response2.get("name")
+    employee_username = response2.get("username")
+    employee_status = [task["completed"] for task in response1]
+    all_task_titles = [task["title"] for task in response1]
+
     task_titles = [task["title"] for task in response1 if task["completed"]]
 
     print("Employee {} is done with tasks({}/{}):".format(
@@ -26,11 +30,11 @@ if __name__ == "__main__":
     employee_data = {
         user_id: [
             {
-                "task": task["title"],
-                "completed": task["completed"],
-                "username": employee_name
+                "task": all_task_titles[i],
+                "completed": employee_status[i],
+                "username": employee_username
             }
-            for task in response1
+            for i in range(len(all_task_titles))
         ]
     }
 
@@ -38,4 +42,4 @@ if __name__ == "__main__":
     filename_json = f"{user_id}.json"
 
     with open(filename_json, mode="w", newline="") as json_file:
-         json.dump(employee_data, json_file)
+        json.dump(employee_data, json_file)

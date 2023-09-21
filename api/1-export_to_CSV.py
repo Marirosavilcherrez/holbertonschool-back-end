@@ -22,10 +22,10 @@ if __name__ == "__main__":
     all_task_titles = [task["title"] for task in response1]
     employee_status = [task["completed"] for task in response1]
 
-    print("Employee {} is done with tasks({}/{})".format(employee_name,
+    print("Employee {} is done with tasks({}/{}):".format(employee_name,
           number_tasks_done, total_tasks))
     for title in task_titles:
-        print(f"\t{title}")
+        print(f"\t {title}")
 
     "Export csv"
     filename_csv = f"{user_id}.csv"

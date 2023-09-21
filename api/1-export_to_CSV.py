@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Python script export CSV"""
-
+import csv
 import requests
 import sys
-import csv
 
 if __name__ == "__main__":
     user_id = sys.argv[1]

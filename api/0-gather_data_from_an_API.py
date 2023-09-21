@@ -17,7 +17,7 @@ if __name__ == "__main__":
     employee_name = response2.get("name")
     task_titles = [task["title"] for task in response1 if task["completed"]]
 
-    print("Employee {} is done with tasks({}/{})".format(
+    print("Employee {} is done with tasks({}/{}):".format(
           employee_name, number_tasks_done, total_tasks))
     for title in task_titles:
         print(f"\t{title}")
